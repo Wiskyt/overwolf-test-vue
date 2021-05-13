@@ -1,0 +1,98 @@
+{
+  "manifest_version": 1,
+  "type": "WebApp",
+  "meta": {
+    "name": "Overwolf test app",
+    "author": "Wiskyt",
+    "version": "1.0.0",
+    "minimum-overwolf-version": "0.160.0",
+    "description": "TS Vue Vuex",
+    "dock_button_title": "OW TS VUE(x)",
+    "icon": "icons/iconMouseOver.png",
+    "icon_gray": "icons/iconMouseNormal.png",
+    "launcher_icon": "icons/desktopIcon.ico",
+    "window_icon": "icons/taskbarIcon.png"
+  },
+  "permissions": [
+    "Hotkeys",
+    "GameInfo"
+  ],
+  "data": {
+    "start_window": "background",
+    "windows": {
+      "background": {
+        "file": "index.html",
+        "is_background_page": true
+      },
+      "desktop": {
+        "file": "index.html",
+        "desktop_only": true,
+        "native_window": true,
+        "resizable": true,
+        "transparent": true,
+        "override_on_update": true,
+        "size": {
+          "width": 1000,
+          "height": 600
+        },
+        "min_size": {
+          "width": 1000,
+          "height": 600
+        }
+      },
+      "in_game": {
+        "file": "index.html",
+        "in_game_only": true,
+        "focus_game_takeover": "ReleaseOnHidden",
+        "focus_game_takeover_release_hotkey": "showhide",
+        "resizable": true,
+        "transparent": true,
+        "override_on_update": true,
+        "size": {
+          "width": 1000,
+          "height": 600
+        },
+        "min_size": {
+          "width": 1000,
+          "height": 600
+        }
+      }
+    },
+    "game_targeting": {
+      "type": "dedicated",
+      "game_ids": [
+        10902,
+        5426
+      ]
+    },
+    "game_events": [
+      10902,
+      5426
+    ],
+    "launch_events": [
+      {
+        "event": "GameLaunch",
+        "event_data": {
+          "game_ids": [
+            10902,
+            5426
+          ]
+        },
+        "start_minimized": false
+      }
+    ],
+    "hotkeys": {
+      "showhide": {
+        "title": "Show/Hide In-Game Window",
+        "action-type": "toggle",
+        "default": "Ctrl+F"
+      }
+    },
+    "force_browser": "user",
+    "developer": {
+      "enable_auto_refresh": true,
+      "reload_delay": 1000,
+      "filter": "*.*"
+    }
+  }
+}
