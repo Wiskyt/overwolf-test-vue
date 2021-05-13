@@ -1,0 +1,32 @@
+export const LauncherFeatures = [
+  "game_flow",
+  "summoner_info",
+  "champ_select",
+  "lobby_info",
+  "end_game",
+  "lcu_info",
+  "game_info",
+  "clash",
+]
+
+export const GameFeatures = [
+  "gep_internal",
+  "live_client_data",
+  "matchState",
+  "match_info",
+  "death",
+  "respawn",
+  "abilities",
+  "kill",
+  "assist",
+  "gold",
+  "minions",
+  "summoner_info",
+  "gameMode",
+  "teams",
+  "level",
+  "announcer",
+  "counters",
+  "damage",
+  "heal",
+]

@@ -1,20 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <BackgroundWindow v-if="window === names.BACKGROUND" />
+    <DesktopWindow v-if="window === names.DESKTOP" />
+    <IngameWindow v-if="window === names.INGAME" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { Component } from "vue-property-decorator";
+import BackgroundWindow from "./windows/background/Background.vue";
+import DesktopWindow from "./windows/desktop/Desktop.vue";
+import IngameWindow from "./windows/ingame/Ingame.vue";
+import {
+  // OWGames,
+  // OWGameListener,
+  OWWindow
+} from '@overwolf/overwolf-api-ts';
+import { WindowNames } from './constants/Windows'
 
-export default Vue.extend({
-  name: "App",
+@Component({
   components: {
-    HelloWorld,
-  },
-});
+    BackgroundWindow,
+    DesktopWindow,
+    IngameWindow,
+  }
+})
+export default class App extends Vue {
+  private windows = {}
+  private currentWindow = ''
+  async mounted() {
+    this.currentWindow = await this.getCurrentWindow()
+
+  }
+  get window() {
+    return this.currentWindow
+  }
+  get windowNames() {
+    return WindowNames
+  }
+  private getCurrentWindow(): Promise<string> {
+    return new Promise(resolve =>
+      overwolf.windows.getCurrentWindow(result => {
+        resolve(result.window.name);
+      })
+    )
+  }
+
+}
 </script>
 
 <style>
