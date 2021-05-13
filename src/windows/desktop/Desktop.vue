@@ -99,28 +99,18 @@ export default class Dekstop extends Vue {
     overwolf.games.launchers.events.setRequiredFeatures(
       10902,
       LAUNCHER_FEATURES,
-      (res: overwolf.games.launchers.events.SetRequiredFeaturesResult) => {
+      // (res: overwolf.games.launchers.events.SetRequiredFeaturesResult) => {
+      () => {
         overwolf.games.launchers.events.getInfo(10902, (info) => {
           console.log("catchup infos", JSON.stringify(info));
           this.summonerName = info.res?.summoner_info?.display_name;
         });
-        //   if (res.info.status == "error") {
-        //     //console.log("Could not set required features: " + info.reason);
-        //     //console.log("Trying in 2 seconds");
-        //     window.setTimeout(this.setFeatures, 2000);
-        //     return;
-        //   }
-        //   console.log("Set required features:");
-        //   console.log(JSON.stringify(res));
-        // }
       }
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onInfoUpdates(info: any) {
     console.log(info);
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onNewEvents(event: any) {
     console.log(event);
   }

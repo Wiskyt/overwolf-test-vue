@@ -2,9 +2,8 @@
   <div>
     <Header />
     <h1>Ingame</h1>
-    <!--
-    <h3>Game loading..</h3>
-    <h3>Game in progress</h3> -->
+    <h3 v-if="matchStarted">Game in progress</h3>
+    <h3 v-else>Game loading..</h3>
   </div>
 </template>
 
@@ -22,6 +21,7 @@ import { GAME_FEATURES } from "../../constants/Features";
 })
 export default class Ingame extends Vue {
   private gameEventListener: OWGamesEvents | undefined;
+  private matchStarted = false;
 
   created(): void {
     this.gameEventListener = new OWGamesEvents(
@@ -36,29 +36,22 @@ export default class Ingame extends Vue {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onInfoUpdates(info: any) {
     console.log(JSON.stringify(info));
+    if (info?.game_info?.matchStarted !== undefined) {
+      this.matchStarted = info.game_info.matchStarted;
+    }
     // this.logLine(this._infoLog, info, false);
   }
 
-  // Special events will be highlighted in the event log
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onNewEvents(event: any) {
     console.log(JSON.stringify(event));
-
-    // const shouldHighlight = e.events.some((event) => {
-    //   switch (event.name) {
-    //     case "kill":
-    //     case "death":
-    //     case "assist":
-    //     case "level":
-    //     case "matchStart":
-    //     case "matchEnd":
-    //       return true;
-    //   }
-
-    //   return false;
-    // });
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+h1,
+h3 {
+  color: black;
+}
+</style>

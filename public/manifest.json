@@ -85,7 +85,7 @@
       "showhide": {
         "title": "Show/Hide Window",
         "action-type": "toggle",
-        "default": "Ctrl+F"
+        "default": "Ctrl+H"
       }
     },
     "force_browser": "user",

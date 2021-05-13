@@ -17,8 +17,6 @@ export default class Background extends Vue {
     this.windows[WINDOW_NAMES.DESKTOP] = new OWWindow(WINDOW_NAMES.DESKTOP);
     this.windows[WINDOW_NAMES.INGAME] = new OWWindow(WINDOW_NAMES.INGAME);
 
-    this.windows[WINDOW_NAMES.DESKTOP].restore();
-
     this.gameListener = new OWGameListener({
       onGameStarted: this.toggleWindows.bind(this),
       onGameEnded: this.toggleWindows.bind(this),

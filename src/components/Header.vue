@@ -27,10 +27,19 @@
 </template>
 
 <script lang="ts">
-import { WINDOW_NAMES } from "@/constants/Windows";
-import { OWWindow } from "@overwolf/overwolf-api-ts";
-import { Component } from "vue-property-decorator";
 import Vue from "vue";
+import { WINDOW_NAMES } from "@/constants/Windows";
+import { OWWindow, OWHotkeys } from "@overwolf/overwolf-api-ts";
+import { Component } from "vue-property-decorator";
+// import WindowState = overwolf.windows.WindowStateEx;
+
+enum WindowState {
+  CLOSED = "closed",
+  MINIMIZED = "minimized",
+  HIDDEN = "hidden",
+  NORMAL = "normal",
+  MAXIMIZED = "maximized",
+}
 
 const HeaderProps = Vue.extend({
   props: {
@@ -47,6 +56,27 @@ export default class Header extends HeaderProps {
   created(): void {
     this.mainWindow = new OWWindow(WINDOW_NAMES.BACKGROUND);
     this.currWindow = new OWWindow(this.windowName);
+
+    const toggleInGameWindow = async (
+      hotkeyResult: overwolf.settings.hotkeys.OnPressedEvent
+    ): Promise<void> => {
+      console.log(`pressed hotkey for ${hotkeyResult.name}`);
+      const inGameState = await this.currWindow?.getWindowState();
+
+      if (
+        inGameState?.window_state === WindowState.NORMAL ||
+        inGameState?.window_state === WindowState.MAXIMIZED
+      ) {
+        this.currWindow?.minimize();
+      } else if (
+        inGameState?.window_state === WindowState.MINIMIZED ||
+        inGameState?.window_state === WindowState.CLOSED
+      ) {
+        this.currWindow?.restore();
+      }
+    };
+
+    OWHotkeys.onHotkeyDown("showhide", toggleInGameWindow);
   }
   minimize(): void {
     this.currWindow?.minimize();
