@@ -1,4 +1,4 @@
-export const LauncherFeatures = [
+export const LAUNCHER_FEATURES = [
   "game_flow",
   "summoner_info",
   "champ_select",
@@ -9,7 +9,7 @@ export const LauncherFeatures = [
   "clash",
 ]
 
-export const GameFeatures = [
+export const GAME_FEATURES = [
   "gep_internal",
   "live_client_data",
   "matchState",
