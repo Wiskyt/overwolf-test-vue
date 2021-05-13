@@ -12,11 +12,6 @@ import { Component } from "vue-property-decorator";
 import BackgroundWindow from "./windows/background/Background.vue";
 import DesktopWindow from "./windows/desktop/Desktop.vue";
 import IngameWindow from "./windows/ingame/Ingame.vue";
-// import {
-//   OWGames,
-//   OWGameListener,
-//   OWWindow,
-// } from "@overwolf/overwolf-api-ts";
 import { WINDOW_NAMES } from "./constants/Windows";
 
 @Component({
@@ -27,17 +22,14 @@ import { WINDOW_NAMES } from "./constants/Windows";
   },
 })
 export default class App extends Vue {
-  private windows = {};
   private currentWindow = "";
   async mounted(): Promise<void> {
     this.currentWindow = await this.getCurrentWindow();
   }
   get window(): string {
-    console.log(this.currentWindow);
     return this.currentWindow;
   }
   get windowNames(): Record<string, string> {
-    console.log(WINDOW_NAMES.DESKTOP);
     return WINDOW_NAMES;
   }
   private getCurrentWindow(): Promise<string> {

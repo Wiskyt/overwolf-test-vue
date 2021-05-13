@@ -108,12 +108,6 @@ export default class Dekstop extends Vue {
       }
     );
   }
-  private onInfoUpdates(info: any) {
-    console.log(info);
-  }
-  private onNewEvents(event: any) {
-    console.log(event);
-  }
 }
 </script>
 

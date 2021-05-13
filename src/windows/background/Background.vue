@@ -50,7 +50,6 @@ export default class Background extends Vue {
     return info && info.isRunning && this.isGameLol(info);
   }
 
-  // Identify whether the RunningGameInfo object we have references Fortnite
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isGameLol(info: any) {
     return info.classId === 5426;
